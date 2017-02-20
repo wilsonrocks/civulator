@@ -8,14 +8,14 @@ assignment = re.compile(r'(?P<name>\w+)\s*=\s*(?P<data>.*)')
 vetnames = re.compile(r'veteran_names = _\("(\w*)"\), _\("(\w*)"\), _\("(\w*)"\), _\("(\w*)"\)')
 vetpower = re.compile(r'veteran_power_fact = (\d+), (\d+), (\d+), (\d+)')
 
-terrainblock = re.compile(r'\[terrain_\w+\]')
+terrainblock = re.compile(r'\[terrain_(?P<terrainname>\w+)\]')
 
 
 
 units = {}
 unit_data_to_get = ["class","attack","defense","hitpoints","firepower"]
 terrain_data_to_get = ["name","class","defense_bonus","native_to"]
-terraindict = {}
+terrains = {}
 veterankeys = []
 veteranvalues = []
 
@@ -64,6 +64,11 @@ with open('terrain.RULESET') as terrainfile:
     for line in terrainfile:
         match = terrainblock.match(line)
         if match:
+            terrainname = match.group("terrainname")
+            print(terrainname)
+            terrains[terrainname] = {}
+            terraindict = terrains[terrainname]
+           
             thisline = ""
             while not thisline == "\n":
                 capture = assignment.match(thisline)
@@ -72,13 +77,13 @@ with open('terrain.RULESET') as terrainfile:
                     name = capture.group("name")
                     data = capture.group("data")
                     if name in terrain_data_to_get:
-                        print(thisline.strip())
+                        #print(thisline.strip())
                         terraindict[name]=data
                 try:
                     thisline = next(terrainfile)
                 except StopIteration:
                     print("Iteration ran out!")
-pprint.pprint(terraindict)
+pprint.pprint(terrains)
 
 @bottle.route('/')
 def index():
