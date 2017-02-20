@@ -5,16 +5,34 @@
 
 Choose your attacker:
 
+<select name="attackerlevel">
+    % for level in veteranlevels:
+        <option value="{{level}}">{{level}}</option>
+    % end
+</select>
+
+
 <select name="attacker">
     % for unit in unitlist:
         <option value="{{unit}}">{{unit}}</option>
     % end    
 </select>
+
+
+
 <p>
 
 Choose your defender:
     
+
+<select name="defenderlevel">
+    % for level in veteranlevels:
+        <option value="{{level}}">{{level}}</option>
+    % end
+</select>
+
 <select name="defender">
+
     % for unit in unitlist:
         <option value="{{unit}}">{{unit}}</option>
     % end    

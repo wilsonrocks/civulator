@@ -49,14 +49,11 @@ with open('units.RULESET') as unitsfile:
                 except StopIteration:
                     print("Iteration ran out!")
             
-print(veterankeys)
-print(veteranvalues)
 veterans=dict(zip(veterankeys,veteranvalues))
-print(veterans)
 
 @bottle.route('/')
 def index():
-    return(bottle.template("civform",unitlist=sorted(units.keys())))
+    return(bottle.template("civform",unitlist=sorted(units.keys()),veteranlevels=veterankeys))
 
 @bottle.post('/combat')
 def combat():
