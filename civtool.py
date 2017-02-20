@@ -51,6 +51,8 @@ with open('units.RULESET') as unitsfile:
             
 print(veterankeys)
 print(veteranvalues)
+veterans=dict(zip(veterankeys,veteranvalues))
+print(veterans)
 
 @bottle.route('/')
 def index():
