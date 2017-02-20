@@ -11,11 +11,22 @@ vetpower = re.compile(r'veteran_power_fact = (\d+), (\d+), (\d+), (\d+)')
 
 units = {}
 data_to_get = ["class","attack","defense","hitpoints","firepower"]
-veterans ={}
+veterankeys = []
+veteranvalues = []
 
 with open('units.RULESET') as unitsfile:
     for line in unitsfile:
-      
+     
+
+        if vetnames.match(line):
+            for n in range(1,5):
+                veterankeys.append(vetnames.match(line).group(n))
+
+        if vetpower.match(line):
+            for n in range(1,5):
+                value = (int(vetpower.match(line).group(n))/100)
+                veteranvalues.append(value)
+
         match = unitdef.match(line)
         if match: # if we have a unit definition, do the following:
             unitname = match.group("unitname")
@@ -38,7 +49,8 @@ with open('units.RULESET') as unitsfile:
                 except StopIteration:
                     print("Iteration ran out!")
             
-#print(units.keys())
+print(veterankeys)
+print(veteranvalues)
 
 @bottle.route('/')
 def index():
