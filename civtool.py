@@ -15,10 +15,6 @@ veterans ={}
 
 with open('units.RULESET') as unitsfile:
     for line in unitsfile:
-        vnm = vetnames.search(line)
-        if vnm:
-            for n in vnm: print(n,vnm.group(n))
-        
       
         match = unitdef.match(line)
         if match: # if we have a unit definition, do the following:
@@ -57,4 +53,4 @@ def combat():
     return("THANKS FOR FIGHTING!")
 
 #print("starting server")
-bottle.run(host='localhost',port=8080,debug=False)
+bottle.run(host='192.168.1.32',port=8080,debug=True,reloader=True)
