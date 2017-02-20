@@ -14,6 +14,8 @@ data_to_get = ["class","attack","defense","hitpoints","firepower"]
 veterankeys = []
 veteranvalues = []
 
+#Do all the stuff for UNITS
+
 with open('units.RULESET') as unitsfile:
     for line in unitsfile:
      
@@ -51,17 +53,24 @@ with open('units.RULESET') as unitsfile:
             
 veterans=dict(zip(veterankeys,veteranvalues))
 
+# do all the stuff for TERRAIN
+
+
+
+
 @bottle.route('/')
 def index():
     return(bottle.template("civform",unitlist=sorted(units.keys()),veteranlevels=veterankeys))
 
 @bottle.post('/combat')
 def combat():
-    print(bottle.request.body.read())
+    #print(bottle.request.body.read())
     data = bottle.request.forms
-    for n in data: print(n,data[n])
-    
-    return("THANKS FOR FIGHTING!")
+    s="<html>"
+    for n in data: s = s + n + ": " + data[n] + "<br>\n"
+    s=s+"</html>"
+    print(s)    
+    return(s)
 
 #print("starting server")
 bottle.run(host='192.168.1.32',port=8080,debug=True,reloader=True)
