@@ -36,7 +36,8 @@ with open('units.RULESET') as unitsfile:
 
         match = unitdef.match(line)
         if match: # if we have a unit definition, do the following:
-            unitname = match.group("unitname")
+            unitname = match.group("unitname").replace("_"," ")
+            unitname = unitname.replace("aegis","AEGIS")
             units[unitname] = {}
             unitdict = units[unitname]
             thisline = ""
@@ -91,7 +92,6 @@ for key in terrains.keys():
     terrains[key.replace('_',' ')]=terrains.pop(key)
 
 @bottle.route('/')
-@bottle.get('/combat')
 def index():
     return(bottle.template("civform",unitlist=sorted(units.keys()),veteranlevels=veterankeys,terrains=sorted(terrains.keys())))
 
