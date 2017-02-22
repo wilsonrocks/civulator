@@ -105,7 +105,7 @@ def combat():
     for n in data: s = s + n + ": " + data[n] + "<br>\n"
     s=s+"</html>"
     print(s)    
-    return(s)
+    return(bottle.template("civresults",data))
 
 #print("starting server")
 bottle.run(host='192.168.1.32',port=8080,debug=True,reloader=True)
