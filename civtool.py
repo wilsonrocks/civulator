@@ -37,14 +37,11 @@ with open('units.RULESET') as unitsfile:
         match = unitdef.match(line)
         if match: # if we have a unit definition, do the following:
             unitname = match.group("unitname")
-            #print(unitname)
             units[unitname] = {}
             unitdict = units[unitname]
             thisline = ""
             while not thisline == "\n":
-                #print(thisline)
 
-                #for stat in data_to_get:
                 capture = assignment.match(thisline)
                 if capture:
                     name = capture.group("name")
@@ -65,7 +62,6 @@ with open('terrain.RULESET') as terrainfile:
         match = terrainblock.match(line)
         if match:
             terrainname = match.group("terrainname")
-            print(terrainname)
             terrains[terrainname] = {}
             terraindict = terrains[terrainname]
            
@@ -91,7 +87,6 @@ for terrainname in terrains:
     terrain["class"] = terrain["class"][1:-1] #strip first and last character (remove "s)
     terrain["defense_bonus"] = int(terrain["defense_bonus"])
     terrain["name"] = terrain["name"][3:-2]
-pprint.pprint(terrains)
 
 @bottle.route('/')
 def index():
@@ -99,12 +94,7 @@ def index():
 
 @bottle.post('/combat')
 def combat():
-    #print(bottle.request.body.read())
     data = bottle.request.forms
-    s="<html>"
-    for n in data: s = s + n + ": " + data[n] + "<br>\n"
-    s=s+"</html>"
-    print(s)    
     return(bottle.template("civresults",data))
 
 #print("starting server")
