@@ -73,7 +73,6 @@ with open('terrain.RULESET') as terrainfile:
                     name = capture.group("name")
                     data = capture.group("data")
                     if name in terrain_data_to_get:
-                        #print(thisline.strip())
                         terraindict[name]=data
                 try:
                     thisline = next(terrainfile)
@@ -86,7 +85,11 @@ for terrainname in terrains:
     terrain = terrains[terrainname]
     terrain["class"] = terrain["class"][1:-1] #strip first and last character (remove "s)
     terrain["defense_bonus"] = int(terrain["defense_bonus"])
-    terrain["name"] = terrain["name"][3:-2]
+    terrain["name"] = terrain["name"][3:-2].replace('_',' ')
+    print(terrain["name"])
+
+for key in terrains.keys():
+    terrains[key.replace('_',' ')]=terrains.pop(key)
 
 @bottle.route('/')
 @bottle.get('/combat')
