@@ -86,7 +86,6 @@ for terrainname in terrains:
     terrain["class"] = terrain["class"][1:-1] #strip first and last character (remove "s)
     terrain["defense_bonus"] = int(terrain["defense_bonus"])
     terrain["name"] = terrain["name"][3:-2].replace('_',' ')
-    print(terrain["name"])
 
 for key in terrains.keys():
     terrains[key.replace('_',' ')]=terrains.pop(key)
