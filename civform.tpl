@@ -1,7 +1,7 @@
 <html>
 <body>
 
-<form action="/combat" method="post">
+<form action="/combat" method="get">
 
 Choose your attacker:
 

@@ -89,13 +89,14 @@ for terrainname in terrains:
     terrain["name"] = terrain["name"][3:-2]
 
 @bottle.route('/')
+@bottle.get('/combat')
 def index():
     return(bottle.template("civform",unitlist=sorted(units.keys()),veteranlevels=veterankeys,terrains=sorted(terrains.keys())))
 
 @bottle.post('/combat')
 def combat():
 
-    data = bottle.request.forms
+    data = bottle.request.params
     data["fortified"] = data.get("fortified","False")
     data["river"] = data.get("river","False")
     return(bottle.template("civresults",data))
