@@ -1,4 +1,7 @@
-When a {{attackerlevel}} {{attacker}} attacks a {{defenderlevel}} {{defender}} 
+<title> {{attackerlevel}} {{attacker}} vs. {{defenderlevel}} {{defender}} </title>
+
+
+What happens when a {{attackerlevel}} {{attacker}} attacks a {{defenderlevel}} {{defender}} 
 % if fortified==True:
 fortified
 % end
@@ -16,10 +19,14 @@ out in the open
 % if river=="True":
 on a river
 %end
-on {{terrain}}.
+on {{terrain}}:
 <p>
 
 
-{{attacker}} has strength {{attackervalue}}. 
+The attacking {{attacker}} has strength {{attackervalue}}. 
 {{attackerlevel}} multiplies it by {{attackerlevelmultiplier}} to get <b>{{attackerlevelvalue}}</b>.
+<p>
+
+The defending {{defender}} has strength {{defendervalue}}. {{defenderlevel}} multiplies it by {{defenderlevelmultiplier}} to get <b>{{defenderlevelvalue}}</b>.
+
 

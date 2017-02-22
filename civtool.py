@@ -98,9 +98,14 @@ for key in terrains.keys():
 
 def dofight(data):
     #work through the calculations, adding each one to data dictionary, so they can be referenced in the form.
+    #attacker stuff
     data["attackervalue"] = units[data["attacker"]]["attack"]
     data["attackerlevelmultiplier"] = veterans[data["attackerlevel"]]
     data["attackerlevelvalue"] = data["attackervalue"]*data["attackerlevelmultiplier"]
+    #defender stuff
+    data["defendervalue"] = units[data["defender"]]["defense"]
+    data["defenderlevelmultiplier"] = veterans[data["defenderlevel"]]
+    data["defenderlevelvalue"] = data["attackervalue"]*data["defenderlevelmultiplier"]
 
 @bottle.route('/')
 def index():
