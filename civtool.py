@@ -94,7 +94,10 @@ def index():
 
 @bottle.post('/combat')
 def combat():
+
     data = bottle.request.forms
+    data["fortified"] = data.get("fortified","False")
+    data["river"] = data.get("river","False")
     return(bottle.template("civresults",data))
 
 #print("starting server")
