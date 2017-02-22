@@ -41,9 +41,10 @@ Choose your defender:
 
 Location:
 <select name="location">
-    <option value="open">Out in the Open</option><br>
-    <option value="city">In a City</option><br>
-    <option value="fort">In a Fort</option>
+    <option value="open">Out in the open</option><br>
+    <option value="city">In an unwalled city</option><br>
+    <option value="walledcity">In a walled city</option><br>
+    <option value="fort">In a fort</option>
 </select>
     <p>
 

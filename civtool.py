@@ -83,6 +83,14 @@ with open('terrain.RULESET') as terrainfile:
                     thisline = next(terrainfile)
                 except StopIteration:
                     print("Iteration ran out!")
+
+# strip extra stuff
+
+for terrainname in terrains:
+    terrain = terrains[terrainname]
+    terrain["class"] = terrain["class"][1:-1] #strip first and last character (remove "s)
+    terrain["defense_bonus"] = int(terrain["defense_bonus"])
+    terrain["name"] = terrain["name"][3:-2]
 pprint.pprint(terrains)
 
 @bottle.route('/')
