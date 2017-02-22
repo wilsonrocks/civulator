@@ -38,6 +38,14 @@ Choose your defender:
     % end    
 </select>
 <p>
+On:
+<select name="terrain">
+    % for terrain in terrains:
+        <option value="{{terrain}}">{{terrain}}</option>
+    % end
+</select>
+
+<p>
 
 Location:
 <select name="location">

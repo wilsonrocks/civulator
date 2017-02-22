@@ -95,7 +95,7 @@ pprint.pprint(terrains)
 
 @bottle.route('/')
 def index():
-    return(bottle.template("civform",unitlist=sorted(units.keys()),veteranlevels=veterankeys))
+    return(bottle.template("civform",unitlist=sorted(units.keys()),veteranlevels=veterankeys,terrains=sorted(terrains.keys())))
 
 @bottle.post('/combat')
 def combat():
