@@ -48,6 +48,11 @@ with open('units.RULESET') as unitsfile:
                     name = capture.group("name")
                     data = capture.group("data")
                     if name in unit_data_to_get:
+                        try:
+                            data = int(data)
+                        except ValueError:
+                            pass
+
                         unitdict[name]=data
                 try:
                     thisline = next(unitsfile)
@@ -91,6 +96,12 @@ for terrainname in terrains:
 for key in terrains.keys():
     terrains[key.replace('_',' ')]=terrains.pop(key)
 
+def dofight(data):
+    #work through the calculations, adding each one to data dictionary, so they can be referenced in the form.
+    data["attackervalue"] = units[data["attacker"]]["attack"]
+    data["attackerlevelmultiplier"] = veterans[data["attackerlevel"]]
+    data["attackerlevelvalue"] = data["attackervalue"]*data["attackerlevelmultiplier"]
+
 @bottle.route('/')
 def index():
     return(bottle.template("civform",unitlist=sorted(units.keys()),veteranlevels=veterankeys,terrains=sorted(terrains.keys())))
@@ -101,6 +112,8 @@ def combat():
     data = bottle.request.params
     data["fortified"] = data.get("fortified","False")
     data["river"] = data.get("river","False")
+    for r in data: print(r,data[r])
+    dofight(data)
     return(bottle.template("civresults",data))
 
 #print("starting server")

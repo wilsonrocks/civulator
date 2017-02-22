@@ -17,3 +17,9 @@ out in the open
 on a river
 %end
 on {{terrain}}.
+<p>
+
+
+{{attacker}} has strength {{attackervalue}}. 
+{{attackerlevel}} multiplies it by {{attackerlevelmultiplier}} to get <b>{{attackerlevelvalue}}</b>.
+
