@@ -90,7 +90,7 @@ with open('terrain.RULESET') as terrainfile:
 for terrainname in terrains:
     terrain = terrains[terrainname]
     terrain["class"] = terrain["class"][1:-1] #strip first and last character (remove "s)
-    terrain["defense_bonus"] = int(terrain["defense_bonus"])
+    terrain["defense_bonus"] = (int(terrain["defense_bonus"])+100)/100
     terrain["name"] = terrain["name"][3:-2].replace('_',' ')
 
 for key in terrains.keys():
@@ -106,6 +106,13 @@ def dofight(data):
     data["defendervalue"] = units[data["defender"]]["defense"]
     data["defenderlevelmultiplier"] = veterans[data["defenderlevel"]]
     data["defenderlevelvalue"] = data["attackervalue"]*data["defenderlevelmultiplier"]
+
+    #terrain stuff
+    print(terrains)
+    print()
+    for n in data: print(n,data[n])
+    data["terrainmultiplier"] = terrains[data["terrain"]]["defense_bonus"]
+    data["terrainvalue"] = data["terrainmultiplier"] * data["defenderlevelvalue"]
 
 @bottle.route('/')
 def index():

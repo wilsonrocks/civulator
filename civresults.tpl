@@ -28,5 +28,7 @@ The attacking {{attacker}} has strength {{attackervalue}}.
 <p>
 
 The defending {{defender}} has strength {{defendervalue}}. {{defenderlevel}} multiplies it by {{defenderlevelmultiplier}} to get <b>{{defenderlevelvalue}}</b>.
+<p>
 
+The defending {{defender}} is on {{terrain}} which gives a x{{terrainmultiplier}} bonus, making the defence score {{terrainvalue}}.
 
