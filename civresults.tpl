@@ -1,7 +1,8 @@
 <title> {{attackerlevel}} {{attacker}} vs. {{defenderlevel}} {{defender}} </title>
 
 
-What happens when a {{attackerlevel}} {{attacker}} attacks a {{defenderlevel}} {{defender}} 
+The story of what happens when a {{attackerlevel}} {{attacker}} attacks a {{defenderlevel}} {{defender}}
+
 % if fortified==True:
 fortified
 % end
@@ -22,13 +23,13 @@ on a river
 on {{terrain}}:
 <p>
 
+Attacking {{attacker}}:<p>
+Combat strength = {{attackervalue}}<p>
+{{attackerlevel}} multiplier of {{attackerlevelmultiplier}} &#x21D2 {{attackerlevelvalue}}<p>
 
-The attacking {{attacker}} has strength {{attackervalue}}. 
-{{attackerlevel}} multiplies it by {{attackerlevelmultiplier}} to get <b>{{attackerlevelvalue}}</b>.
 <p>
+Defending {{defender}}:<p>
+Combat Strength = {{defendervalue}}<p>
+{{defenderlevel}} multiplier of {{defenderlevelmultiplier}} &#x21D2 {{defenderlevelvalue}}<p>
 
-The defending {{defender}} has strength {{defendervalue}}. {{defenderlevel}} multiplies it by {{defenderlevelmultiplier}} to get <b>{{defenderlevelvalue}}</b>.
-<p>
-
-The defending {{defender}} is on {{terrain}} which gives a x{{terrainmultiplier}} bonus, making the defence score {{terrainvalue}}.
-
+{{terrain}} multiplier of {{terrainmultiplier}} &#x21D2 {{terrainvalue}}<p>

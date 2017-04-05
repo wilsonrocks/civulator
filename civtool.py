@@ -1,3 +1,8 @@
+import os
+# Change working directory so relative paths (and template lookup) work again
+#os.chdir(os.path.dirname(__file__))
+
+
 import re
 import pprint
 import bottle
@@ -21,7 +26,7 @@ veteranvalues = []
 
 #Do all the stuff for UNITS
 
-with open('units.RULESET') as unitsfile:
+with open('units.ruleset') as unitsfile:
     for line in unitsfile:
      
 
@@ -63,7 +68,7 @@ veterans=dict(zip(veterankeys,veteranvalues))
 
 # do all the stuff for TERRAIN
 
-with open('terrain.RULESET') as terrainfile:
+with open('terrain.ruleset') as terrainfile:
     for line in terrainfile:
         match = terrainblock.match(line)
         if match:
@@ -108,9 +113,6 @@ def dofight(data):
     data["defenderlevelvalue"] = data["attackervalue"]*data["defenderlevelmultiplier"]
 
     #terrain stuff
-    print(terrains)
-    print()
-    for n in data: print(n,data[n])
     data["terrainmultiplier"] = terrains[data["terrain"]]["defense_bonus"]
     data["terrainvalue"] = data["terrainmultiplier"] * data["defenderlevelvalue"]
 
@@ -124,9 +126,9 @@ def combat():
     data = bottle.request.params
     data["fortified"] = data.get("fortified","False")
     data["river"] = data.get("river","False")
-    for r in data: print(r,data[r])
     dofight(data)
     return(bottle.template("civresults",data))
 
 #print("starting server")
 bottle.run(host='192.168.1.32',port=8080,debug=True,reloader=True)
+#application = bottle.default_app()
