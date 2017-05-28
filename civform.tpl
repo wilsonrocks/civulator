@@ -46,23 +46,28 @@ On:
 </select>
 
 <p>
-
-Location:
 <select name="location">
-    <option value="open">Out in the open</option><br>
-    <option value="city">In an unwalled city</option><br>
-    <option value="walledcity">In a walled city</option><br>
-    <option value="fort">In a fort</option>
+    <option value="in_open">In the Open</option>
+    <option value="in_fortress">In a fortress</option>
+    <option value="in_city">In a city</option>
 </select>
-    <p>
 
-<input type="checkbox" name="river" value="True">On a river<br>
-<input type="checkbox" name="fortified" value="True">Fortified<br>
 <p>
+If in a city:<br>
+        <input type="checkbox" name="greater_8" value="True"> Population &gt; 8<br>
+        <input type="checkbox" name="walls" value="True"> Has city walls<br>
+        <input type="checkbox" name="coastal" value="True"> Has coastal defence<br>
+        <input type="checkbox" name="great_wall" value="True"> You have the Great Wall(which isn't obsolete)<br>
 
+
+
+
+<p>
 <input type="submit" value="Submit">
 
 
 </form>
+
+
 </body>
 </html>

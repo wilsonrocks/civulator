@@ -66,6 +66,9 @@ with open('units.ruleset') as unitsfile:
             
 veterans=dict(zip(veterankeys,veteranvalues))
 
+
+
+
 # do all the stuff for TERRAIN
 
 with open('terrain.ruleset') as terrainfile:
@@ -101,6 +104,17 @@ for terrainname in terrains:
 for key in terrains.keys():
     terrains[key.replace('_',' ')]=terrains.pop(key)
 
+import json
+
+
+open("civJSON","w").write(json.dumps([data,terrains,veterans,units]))
+
+#print(data)
+#print(terrains)
+#print(veterans)
+#print(units)
+
+
 def dofight(data):
     #work through the calculations, adding each one to data dictionary, so they can be referenced in the form.
     #attacker stuff
@@ -116,6 +130,9 @@ def dofight(data):
     data["terrainmultiplier"] = terrains[data["terrain"]]["defense_bonus"]
     data["terrainvalue"] = data["terrainmultiplier"] * data["defenderlevelvalue"]
 
+
+
+
 @bottle.route('/')
 def index():
     return(bottle.template("civform",unitlist=sorted(units.keys()),veteranlevels=veterankeys,terrains=sorted(terrains.keys())))
@@ -124,6 +141,9 @@ def index():
 def combat():
 
     data = bottle.request.params
+    for d in data:
+        print(d,data[d])
+    print(data)
     data["fortified"] = data.get("fortified","False")
     data["river"] = data.get("river","False")
     dofight(data)
