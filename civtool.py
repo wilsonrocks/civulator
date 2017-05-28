@@ -28,7 +28,7 @@ veteranvalues = []
 
 with open('units.ruleset') as unitsfile:
     for line in unitsfile:
-     
+
 
         if vetnames.match(line):
             for n in range(1,5):
@@ -63,11 +63,8 @@ with open('units.ruleset') as unitsfile:
                     thisline = next(unitsfile)
                 except StopIteration:
                     print("Iteration ran out!")
-            
+
 veterans=dict(zip(veterankeys,veteranvalues))
-
-
-
 
 # do all the stuff for TERRAIN
 
@@ -78,7 +75,6 @@ with open('terrain.ruleset') as terrainfile:
             terrainname = match.group("terrainname")
             terrains[terrainname] = {}
             terraindict = terrains[terrainname]
-           
             thisline = ""
             while not thisline == "\n":
                 capture = assignment.match(thisline)
@@ -131,7 +127,11 @@ def dofight(data):
     data["terrainvalue"] = data["terrainmultiplier"] * data["defenderlevelvalue"]
 
 
-
+def do_checkbox(data,fieldname):
+    if data.get(fieldname,False):
+        data[fieldname] = True
+    else:
+        data[fieldname] = False
 
 @bottle.route('/')
 def index():
@@ -141,11 +141,14 @@ def index():
 def combat():
 
     data = bottle.request.params
+
+    checkboxes = ["greater_8", "walls", "coastal", "great_wall", "river"]
+    for box in checkboxes:
+        do_checkbox(data,box)
+
     for d in data:
         print(d,data[d])
-    print(data)
-    data["fortified"] = data.get("fortified","False")
-    data["river"] = data.get("river","False")
+
     dofight(data)
     return(bottle.template("civresults",data))
 

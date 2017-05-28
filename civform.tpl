@@ -15,7 +15,7 @@ Choose your attacker:
 <select name="attacker">
     % for unit in unitlist:
         <option value="{{unit}}">{{unit}}</option>
-    % end    
+    % end
 </select>
 
 
@@ -23,7 +23,6 @@ Choose your attacker:
 <p>
 
 Choose your defender:
-    
 
 <select name="defenderlevel">
     % for level in veteranlevels:
@@ -35,7 +34,7 @@ Choose your defender:
 
     % for unit in unitlist:
         <option value="{{unit}}">{{unit}}</option>
-    % end    
+    % end
 </select>
 <p>
 On:
@@ -51,6 +50,9 @@ On:
     <option value="in_fortress">In a fortress</option>
     <option value="in_city">In a city</option>
 </select>
+<p>
+
+    <input type="checkbox" name="fortified" value="True"> The unit is fortified(makes no difference in a city, sentry instead)<br>
 
 <p>
 If in a city:<br>
@@ -59,6 +61,7 @@ If in a city:<br>
         <input type="checkbox" name="coastal" value="True"> Has coastal defence<br>
         <input type="checkbox" name="great_wall" value="True"> You have the Great Wall(which isn't obsolete)<br>
 
+        <input type="checkbox" name="river" value="True"> Is on a river<br>
 
 
 

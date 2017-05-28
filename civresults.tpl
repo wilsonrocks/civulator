@@ -12,9 +12,9 @@ in a walled city
 % elif location=="city":
 in an unwalled city
 % elif location=="fort":
-in a fort 
+in a fort
 %elif location=="open":
-out in the open 
+out in the open
 % end
 
 % if river=="True":
