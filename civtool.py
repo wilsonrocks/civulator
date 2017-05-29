@@ -103,7 +103,7 @@ for key in terrains.keys():
 import json
 
 
-open("civJSON","w").write(json.dumps([data,terrains,veterans,units]))
+open("civJSON","w").write(json.dumps([data,terrains,veterans,units])) #TODO change so that it loads from this instead of ruleset files if ruleset files haven't been updated
 
 #print(data)
 #print(terrains)
@@ -126,6 +126,12 @@ def dofight(data):
     data["terrainmultiplier"] = terrains[data["terrain"]]["defense_bonus"]
     data["terrainvalue"] = data["terrainmultiplier"] * data["defenderlevelvalue"]
 
+    #fortified
+    if data["fortified"] and data["location"] != "in_city":
+        data["fortifiedmultiplier"] = 1.5
+    else:
+        data["fortifiedmultiplier"] = 1
+    data["fortifiedvalue"] = data["fortifiedmultiplier"] * data["terrainvalue"]
 
 def do_checkbox(data,fieldname):
     if data.get(fieldname,False):
@@ -142,7 +148,7 @@ def combat():
 
     data = bottle.request.params
 
-    checkboxes = ["greater_8", "walls", "coastal", "great_wall", "river"]
+    checkboxes = ["greater_8", "walls", "coastal", "great_wall", "river","fortified"]
     for box in checkboxes:
         do_checkbox(data,box)
 

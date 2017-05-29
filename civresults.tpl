@@ -33,3 +33,12 @@ Combat Strength = {{defendervalue}}<p>
 {{defenderlevel}} multiplier of {{defenderlevelmultiplier}} &#x21D2 {{defenderlevelvalue}}<p>
 
 {{terrain}} multiplier of {{terrainmultiplier}} &#x21D2 {{terrainvalue}}<p>
+
+% if fortified==True:
+{{attacker}} is fortified, 
+%    if location=="in_city":
+        but it doesn't make a difference because it is in a city.
+%    else:
+        multiplier of {{fortifiedmultiplier}} &#x21D2 {{fortifiedvalue}}
+
+% end
