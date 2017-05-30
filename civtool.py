@@ -108,7 +108,7 @@ open("civJSON","w").write(json.dumps([data,terrains,veterans,units])) #TODO chan
 #print(data)
 #print(terrains)
 #print(veterans)
-#print(units)
+print(units)
 
 
 def dofight(data):
@@ -123,7 +123,8 @@ def dofight(data):
     data["defenderlevelvalue"] = data["attackervalue"]*data["defenderlevelmultiplier"]
 
     #terrain stuff
-    data["terrainmultiplier"] = terrains[data["terrain"]]["defense_bonus"]
+    for d in data: print(d,data[d])
+    data["terrainmultiplier"] = terrains[data["terrain"]]["defense_bonus"]#TODO should only be if Land not Big Land
     data["terrainvalue"] = data["terrainmultiplier"] * data["defenderlevelvalue"]
 
     #fortified
@@ -149,11 +150,17 @@ def combat():
     data = bottle.request.params
 
     checkboxes = ["greater_8", "walls", "coastal", "great_wall", "river","fortified"]
+
     for box in checkboxes:
         do_checkbox(data,box)
 
+    data["attackerclass"] = units["attacker"]["class"]
+    
+
     for d in data:
         print(d,data[d])
+    
+
 
     dofight(data)
     return(bottle.template("civresults",data))
