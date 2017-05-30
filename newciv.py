@@ -1,3 +1,5 @@
+import re
+
 import peewee
 
 db = peewee.SqliteDatabase("civstats.db")
@@ -35,4 +37,22 @@ class Relationship(CivModel):
         database = db
         indexes = (
                 (('terrain', 'unit_class'), True),)
+
 db.create_tables([UnitClass,VetLevel,Unit,Terrain,Relationship],safe=True)
+
+#UNITS
+
+unit_keys = ["class","attack","defense","hitpoints","firepower"] #as specified in the ruleset file, note spelling
+
+with open('units.ruleset') as unitsfile:
+    unitdef = re.compile(r'\[unit_(?P<unitname>\w+)')
+    for line in unitsfile:
+        match = unitdef.match(line)
+        if match:
+            new_unit = Unit()
+            new_unit.name = match.group("unitname").replace("_"," ")
+            print(new_unit.name)
+
+
+
+
