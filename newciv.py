@@ -34,6 +34,7 @@ assignment = re.compile(r'(?P<name>\w+)\s*=\s*(?P<data>.*)')
 
 with open('units.ruleset') as unitsfile:
     unitdef = re.compile(r'\[unit_(?P<unitname>\w+)')
+
     for line in unitsfile:
         match = unitdef.match(line)
         if match:
@@ -60,6 +61,26 @@ with open('units.ruleset') as unitsfile:
                         new_unit.HP = data
 
             new_unit.save()
+
+        #VETLEVELS STUFF
+
+VetLevel(name="Green",multiplier=0).save()
+VetLevel(name="Veteran",multiplier=50).save()
+VetLevel(name="Hardened",multiplier=75).save()
+VetLevel(name="Elite",multiplier=100).save()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #TERRAIN
 with open('terrain.ruleset') as terrainfile:
