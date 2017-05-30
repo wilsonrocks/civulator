@@ -10,17 +10,15 @@ class CivModel(peewee.Model):
     class Meta:
         database = db
 
-class UnitClass(CivModel):
-    name = peewee.CharField(max_length=20)
-
 class VetLevel(CivModel):
     name = peewee.CharField(max_length=20)
     multiplier = peewee.IntegerField()
 
 class Unit(CivModel):
-    unit_class = peewee.ForeignKeyField(UnitClass)
-    attack = peewee.IntegerField
-    defence = peewee.IntegerField
+    name = peewee.CharField(max_length=20)
+    unit_class = peewee.CharField(max_length=20)
+    attack = peewee.IntegerField()
+    defence = peewee.IntegerField()
     HP = peewee.IntegerField()
     FP = peewee.IntegerField()
 
@@ -29,22 +27,10 @@ class Terrain(CivModel):
     terrain_class = peewee.CharField(max_length=20)
     defence_bonus = peewee.IntegerField()
 
-
-class Relationship(CivModel):
-    terrain = peewee.ForeignKeyField(Terrain, related_name="native_to")
-    unit_class = peewee.ForeignKeyField(UnitClass, related_name="can_enter")
-
-    class Meta:
-        database = db
-        indexes = (
-                (('terrain', 'unit_class'), True),)
-
-db.create_tables([UnitClass,VetLevel,Unit,Terrain,Relationship],safe=True)
+db.create_tables([VetLevel,Unit,Terrain],safe=True)
 assignment = re.compile(r'(?P<name>\w+)\s*=\s*(?P<data>.*)')
 #UNITS
 #TODO Need to do unit classes first
-
-unit_keys = ["class","attack","defense","hitpoints","firepower"] #as specified in the ruleset file, note spelling
 
 with open('units.ruleset') as unitsfile:
     unitdef = re.compile(r'\[unit_(?P<unitname>\w+)')
@@ -52,8 +38,7 @@ with open('units.ruleset') as unitsfile:
         match = unitdef.match(line)
         if match:
             new_unit = Unit()
-            new_unit.name = match.group("unitname").replace("_"," ")
-            print(new_unit.name)
+            new_unit.name = match.group("unitname").replace("_"," ").title()
             for stat in takewhile(lambda x: x != "\n" ,unitsfile):
                 capture = assignment.match(stat)
                 if capture:
@@ -63,9 +48,8 @@ with open('units.ruleset') as unitsfile:
                         data = int(data)
                     except ValueError:
                         pass
-                    
                     if name == "class":
-                        new_unit.unit_class = UnitClass(name=data)
+                        new_unit.unit_class = data[1:-1]
                     if name == "attack":
                         new_unit.attack = data
                     if name == "defense": #check spellings!!
