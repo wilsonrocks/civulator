@@ -1,33 +1,8 @@
 import re
 from itertools import takewhile
 
-import peewee
+from models import *
 
-db = peewee.SqliteDatabase("civstats.db")
-
-
-class CivModel(peewee.Model):
-    class Meta:
-        database = db
-
-class VetLevel(CivModel):
-    name = peewee.CharField(max_length=20)
-    multiplier = peewee.IntegerField()
-
-class Unit(CivModel):
-    name = peewee.CharField(max_length=20)
-    unit_class = peewee.CharField(max_length=20)
-    attack = peewee.IntegerField()
-    defence = peewee.IntegerField()
-    HP = peewee.IntegerField()
-    FP = peewee.IntegerField()
-
-class Terrain(CivModel):
-    name = peewee.CharField(max_length=20)
-    terrain_class = peewee.CharField(max_length=20)
-    defence_bonus = peewee.IntegerField()
-
-db.create_tables([VetLevel,Unit,Terrain],safe=True)
 assignment = re.compile(r'(?P<name>\w+)\s*=\s*(?P<data>.*)')
 
 #UNITS
@@ -62,24 +37,14 @@ with open('units.ruleset') as unitsfile:
 
             new_unit.save()
 
-        #VETLEVELS STUFF
+#VETLEVELS STUFF
+
+#HACKY
 
 VetLevel(name="Green",multiplier=0).save()
 VetLevel(name="Veteran",multiplier=50).save()
 VetLevel(name="Hardened",multiplier=75).save()
 VetLevel(name="Elite",multiplier=100).save()
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #TERRAIN
